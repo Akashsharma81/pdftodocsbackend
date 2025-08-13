@@ -8,7 +8,6 @@ import cors from "cors";
 
 const app = express();
 app.use(cors());
-
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, "uploads/"),
   filename: (req, file, cb) => {
@@ -20,7 +19,9 @@ const upload = multer({ storage });
 
 const PORT = 7000;
 const pythonExe = "C:\\Users\\~Akash~\\AppData\\Local\\Programs\\Python\\Python313\\python.exe";
-
+app.get("/", (req, res) => {
+  res.send("Backend is running");
+});
 app.post("/convert", upload.single("file"), (req, res) => {
   if (!req.file) return res.status(400).json({ error: "No file uploaded" });
 
